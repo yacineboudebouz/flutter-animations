@@ -10,6 +10,19 @@ class AnimatedColorPalette extends StatefulWidget {
 
 class _AnimatedColorPaletteState extends State<AnimatedColorPalette> {
   List<Color> currentPalette = generateRandomPalette();
+  int width = generateRandomDimentions();
+  int height = generateRandomDimentions();
+  // List<AlignmentGeometry> align = [
+  //   Alignment.bottomCenter,
+  //   Alignment.centerLeft,
+  //   Alignment.topLeft,
+  //   Alignment.topRight
+  // ];
+
+  static int generateRandomDimentions() {
+    final random = Random();
+    return random.nextInt(200);
+  }
 
   static List<Color> generateRandomPalette() {
     final random = Random();
@@ -27,6 +40,8 @@ class _AnimatedColorPaletteState extends State<AnimatedColorPalette> {
   void regeneratePalette() {
     setState(() {
       currentPalette = generateRandomPalette();
+      width = generateRandomDimentions();
+      height = generateRandomDimentions();
     });
   }
 
@@ -40,13 +55,25 @@ class _AnimatedColorPaletteState extends State<AnimatedColorPalette> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            for (Color color in currentPalette)
-              Container(
-                width: 100,
-                height: 100,
-                color: color,
-                margin: const EdgeInsets.all(8),
-              ),
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 500),
+              width: height.toDouble(),
+              height: width.toDouble(),
+              color: currentPalette[2],
+              curve: Curves.easeInOutBack,
+              margin: const EdgeInsets.all(8),
+            ),
+            // AnimatedAlign(
+            //   alignment: align[Random().nextInt(3)],
+            //   duration: const Duration(seconds: 1),
+            //   child: AnimatedContainer(
+            //     duration: const Duration(seconds: 1),
+            //     width: height.toDouble(),
+            //     height: width.toDouble(),
+            //     color: currentPalette[2],
+            //     margin: const EdgeInsets.all(8),
+            //   ),
+            // ),
             ElevatedButton(
               onPressed: regeneratePalette,
               child: const Text('Generate New Palette'),
