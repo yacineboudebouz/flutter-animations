@@ -1,4 +1,4 @@
-import 'package:animation_starter_code/explicit_examples/list_animation.dart';
+import 'package:animation_starter_code/explicit_examples/loading_animation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const ListAnimation(),
+      home: const RadialProgressAnimation(progress: 0.60, color: Colors.indigo),
     );
   }
 }
